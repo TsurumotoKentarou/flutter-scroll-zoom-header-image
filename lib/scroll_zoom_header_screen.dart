@@ -9,12 +9,13 @@ class ScrollZoomHeaderScreen extends StatefulWidget {
 class _ScrollZoomHeaderScreenState extends State<ScrollZoomHeaderScreen> {
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
         body: SafeArea(
       child: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-              backgroundColor: Colors.transparent,
+              backgroundColor: Colors.blue,
               floating: true,
               pinned: true,
               stretch: true,
@@ -24,7 +25,15 @@ class _ScrollZoomHeaderScreenState extends State<ScrollZoomHeaderScreen> {
                   stretchModes: [
                     StretchMode.zoomBackground,
                   ],
-                  background: Image.asset('assets/mountain.jpg'))),
+                  background: FittedBox(
+                    fit: BoxFit.fill,
+                    child: Image.asset(
+                      'assets/mountain.jpg',
+                      // fit: BoxFit.fill,
+                      // height: 200,
+                      // width: size.width,
+                    ),
+                  ))),
           SliverPadding(
             padding: const EdgeInsets.all(10),
             sliver: SliverList(
