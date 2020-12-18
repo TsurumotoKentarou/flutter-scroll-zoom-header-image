@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 
 class ScrollZoomHeaderScreen extends StatefulWidget {
   @override
@@ -8,7 +7,6 @@ class ScrollZoomHeaderScreen extends StatefulWidget {
 }
 
 class _ScrollZoomHeaderScreenState extends State<ScrollZoomHeaderScreen> {
-  ScrollController _controller = ScrollController();
   double scrollOffsetY = 0.0;
   final double maxStretchScrollOffsetY = 200;
   @override
@@ -17,12 +15,6 @@ class _ScrollZoomHeaderScreenState extends State<ScrollZoomHeaderScreen> {
         body: SafeArea(
       child: NotificationListener<ScrollUpdateNotification>(
         onNotification: (notification) {
-          // Logger()..d(notification);
-          if (notification is OverscrollNotification) {
-            print('呼ばれた');
-          }
-
-          // print(notification.metrics.pixels);
           setState(() {
             if (notification.metrics.pixels < 0) {
               print(notification.metrics.pixels);
@@ -38,7 +30,6 @@ class _ScrollZoomHeaderScreenState extends State<ScrollZoomHeaderScreen> {
           return false;
         },
         child: CustomScrollView(
-          controller: this._controller,
           slivers: <Widget>[
             SliverAppBar(
                 floating: false,
