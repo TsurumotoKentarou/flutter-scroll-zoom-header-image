@@ -22,7 +22,7 @@ class ScrollZoomHeaderScreen extends StatelessWidget {
     }));
 
     // ヘッダー画像の幅
-    final headerImageWidth = MediaQuery.of(context).size.width;
+    final headerWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
         body: SafeArea(
@@ -36,7 +36,7 @@ class ScrollZoomHeaderScreen extends StatelessWidget {
                     pinned: true,
                     stretch: true,
                     expandedHeight: snapshot.hasData
-                        ? headerImageWidth *
+                        ? headerWidth *
                             snapshot.data.height /
                             snapshot.data.width
                         : 0,
