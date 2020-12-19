@@ -8,8 +8,8 @@ class ScrollZoomHeaderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ヘッダー画像
-    final Image headerImage = Image(
-      image: AssetImage('assets/view.jpg'),
+    final Image headerImage = Image.asset(
+      'assets/view.jpg',
       fit: BoxFit.cover,
     );
 
