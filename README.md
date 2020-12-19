@@ -1,16 +1,9 @@
-# scroll_zoom_header_view
+# flutter-scroll-zoom-header-image
 
-A new Flutter application.
+A sample flutter app that zoomed image header when scrolled.
 
-## Getting Started
+![](https://raw.github.com/wiki/TsurumotoKentarou/flutter-scroll-zoom-header-image/images/preview1.gif)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Requirement
+Flutter: 1.22
+Dart: 2.10
