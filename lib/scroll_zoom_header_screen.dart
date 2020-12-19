@@ -1,39 +1,52 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:ui' as ui show Image;
 
-class ScrollZoomHeaderScreen extends StatefulWidget {
-  @override
-  _ScrollZoomHeaderScreenState createState() => _ScrollZoomHeaderScreenState();
-}
-
-class _ScrollZoomHeaderScreenState extends State<ScrollZoomHeaderScreen> {
+class ScrollZoomHeaderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    // ヘッダー画像
+    final Image headerImage = Image(
+      image: AssetImage('assets/view.jpg'),
+      fit: BoxFit.cover,
+    );
+
+    // ヘッダー画像のCompleter
+    Completer<ui.Image> completer = new Completer<ui.Image>();
+    headerImage.image
+        .resolve(ImageConfiguration())
+        .addListener(ImageStreamListener((ImageInfo info, bool _) {
+      completer.complete(info.image);
+    }));
+
+    // ヘッダー画像の幅
+    final headerImageWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
         body: SafeArea(
       child: CustomScrollView(
         slivers: <Widget>[
-          SliverAppBar(
-              backgroundColor: Colors.blue,
-              floating: true,
-              pinned: true,
-              stretch: true,
-              expandedHeight: 200,
-              flexibleSpace: FlexibleSpaceBar(
-                  collapseMode: CollapseMode.parallax,
-                  stretchModes: [
-                    StretchMode.zoomBackground,
-                  ],
-                  background: FittedBox(
-                    fit: BoxFit.fill,
-                    child: Image.asset(
-                      'assets/mountain.jpg',
-                      // fit: BoxFit.fill,
-                      // height: 200,
-                      // width: size.width,
-                    ),
-                  ))),
+          FutureBuilder<ui.Image>(
+              future: completer.future,
+              builder: (context, snapshot) {
+                return SliverAppBar(
+                    backgroundColor: Colors.white,
+                    pinned: true,
+                    stretch: true,
+                    expandedHeight: snapshot.hasData
+                        ? headerImageWidth *
+                            snapshot.data.height /
+                            snapshot.data.width
+                        : 0,
+                    flexibleSpace: FlexibleSpaceBar(
+                        collapseMode: CollapseMode.parallax,
+                        stretchModes: [
+                          StretchMode.zoomBackground,
+                        ],
+                        background: headerImage));
+              }),
           SliverPadding(
             padding: const EdgeInsets.all(10),
             sliver: SliverList(
